@@ -37,6 +37,7 @@ class Hero:
 
 class AbstractEffect(Hero, ABC):
     def __init__(self, base):
+        super().__init__()
         self.base = base
 
     @abstractmethod
@@ -54,9 +55,9 @@ class AbstractEffect(Hero, ABC):
 
 class AbstractPositive(AbstractEffect, ABC):
     def get_positive_effects(self):
-        tempo = self.base.get_positive_effects()
-        tempo.append(self.__class__.__name__)
-        return tempo
+        effects = self.base.get_positive_effects()
+        effects.append(self.__class__.__name__)
+        return effects
 
     @abstractmethod
     def get_stats(self):
@@ -75,65 +76,65 @@ class AbstractNegative(AbstractEffect, ABC):
         pass
 
     def get_negative_effects(self):
-        tempo = self.base.get_negative_effects()
-        tempo.append(self.__class__.__name__)
-        return tempo
+        effects = self.base.get_negative_effects()
+        effects.append(self.__class__.__name__)
+        return effects
 
 
 class Berserk(AbstractPositive):
     def get_stats(self):
-        tempo = self.base.get_stats()
-        tempo["Strength"] += 7
-        tempo["Endurance"] += 7
-        tempo["Agility"] += 7
-        tempo["Luck"] += 7
-        tempo["HP"] += 50
-        tempo["Perception"] -= 3
-        tempo["Intelligence"] -= 3
-        tempo["Charisma"] -= 3
-        return tempo
+        stats = self.base.get_stats()
+        stats["Strength"] += 7
+        stats["Endurance"] += 7
+        stats["Agility"] += 7
+        stats["Luck"] += 7
+        stats["HP"] += 50
+        stats["Perception"] -= 3
+        stats["Intelligence"] -= 3
+        stats["Charisma"] -= 3
+        return stats
 
 
 class Blessing(AbstractPositive):
     def get_stats(self):
-        tempo = self.base.get_stats()
-        tempo["Strength"] += 2
-        tempo["Endurance"] += 2
-        tempo["Agility"] += 2
-        tempo["Luck"] += 2
-        tempo["Perception"] += 2
-        tempo["Intelligence"] += 2
-        tempo["Charisma"] += 2
-        return tempo
+        stats = self.base.get_stats()
+        stats["Strength"] += 2
+        stats["Endurance"] += 2
+        stats["Agility"] += 2
+        stats["Luck"] += 2
+        stats["Perception"] += 2
+        stats["Intelligence"] += 2
+        stats["Charisma"] += 2
+        return stats
 
 
 class Weakness(AbstractNegative):
     def get_stats(self):
-        tempo = self.base.get_stats()
-        tempo["Strength"] -= 4
-        tempo["Endurance"] -= 4
-        tempo["Agility"] -= 4
-        return tempo
+        stats = self.base.get_stats()
+        stats["Strength"] -= 4
+        stats["Endurance"] -= 4
+        stats["Agility"] -= 4
+        return stats
 
 
 class EvilEye(AbstractNegative):
     def get_stats(self):
-        tempo = self.base.get_stats()
-        tempo["Luck"] -= 10
-        return tempo
+        stats = self.base.get_stats()
+        stats["Luck"] -= 10
+        return stats
 
 
 class Curse(AbstractNegative):
     def get_stats(self):
-        tempo = self.base.get_stats()
-        tempo["Strength"] -= 2
-        tempo["Endurance"] -= 2
-        tempo["Agility"] -= 2
-        tempo["Luck"] -= 2
-        tempo["Perception"] -= 2
-        tempo["Intelligence"] -= 2
-        tempo["Charisma"] -= 2
-        return tempo
+        stats = self.base.get_stats()
+        stats["Strength"] -= 2
+        stats["Endurance"] -= 2
+        stats["Agility"] -= 2
+        stats["Luck"] -= 2
+        stats["Perception"] -= 2
+        stats["Intelligence"] -= 2
+        stats["Charisma"] -= 2
+        return stats
 
 
 hero = Hero()
